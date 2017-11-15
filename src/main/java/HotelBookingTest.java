@@ -16,8 +16,9 @@ import org.testng.annotations.Test;
 public class HotelBookingTest {
 
     static WebDriver driver ;
+    HotelBookingTest page;
     
-    @FindBy(how = How.XPATH, using = "//*[@id=\"Home\"]/div/div/ul/li/div/div[2]/aside[1]/nav/ul[1]/li[2]/a[1]")
+    @FindBy(linkText = "Hotels")
     public WebElement hotelLink;
 
     @FindBy(id = "Tags")
@@ -37,16 +38,16 @@ public class HotelBookingTest {
         
         
         driver.get("https://www.cleartrip.com/");
-        PageFactory.initElements(driver,HotelBookingTest.class);
+        page = PageFactory.initElements(driver,HotelBookingTest.class);
         
         waitFor(2000);
        
-        hotelLink.click();
+        page.hotelLink.click();
 
-        localityTextBox.sendKeys("Indiranagar, Bangalore");
+        page.localityTextBox.sendKeys("Indiranagar, Bangalore");
 
-        new Select(travellerSelection).selectByVisibleText("1 room, 2 adults");
-        searchButton.click();
+        new Select(page.travellerSelection).selectByVisibleText("1 room, 2 adults");
+        page.searchButton.click();
 
         driver.quit();
 

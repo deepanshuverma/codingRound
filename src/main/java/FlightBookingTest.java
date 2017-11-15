@@ -47,7 +47,7 @@ public class FlightBookingTest {
 
         //all fields filled in. Now click on search
         driver.findElement(By.id("SearchBtn")).click();
-
+        	
         waitFor(5000);
         //verify that result appears for the provided journey search
         Assert.assertTrue(isElementPresent(By.className("searchSummary")));
