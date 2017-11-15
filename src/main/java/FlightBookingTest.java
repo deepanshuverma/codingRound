@@ -1,15 +1,16 @@
 import com.sun.javafx.PlatformUtil;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
+//@RunWith(JUnit.class)
 public class FlightBookingTest {
 
     WebDriver driver = new ChromeDriver();
@@ -32,8 +33,8 @@ public class FlightBookingTest {
         List<WebElement> originOptions = driver.findElement(By.id("ui-id-1")).findElements(By.tagName("li"));
         originOptions.get(0).click();
 
-        driver.findElement(By.id("toTag")).clear();
-        driver.findElement(By.id("toTag")).sendKeys("Delhi");
+        driver.findElement(By.cssSelector("input[etitle='To']")).clear();
+        driver.findElement(By.cssSelector("input[etitle='To']")).sendKeys("Delhi");
 
         //wait for the auto complete options to appear for the destination
 

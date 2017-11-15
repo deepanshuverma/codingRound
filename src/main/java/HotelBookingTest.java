@@ -1,32 +1,46 @@
 import com.sun.javafx.PlatformUtil;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
 public class HotelBookingTest {
 
-    WebDriver driver = new ChromeDriver();
-
-    @FindBy(linkText = "Hotels")
-    private WebElement hotelLink;
+    static WebDriver driver ;
+    
+    @FindBy(how = How.XPATH, using = "//*[@id=\"Home\"]/div/div/ul/li/div/div[2]/aside[1]/nav/ul[1]/li[2]/a[1]")
+    public WebElement hotelLink;
 
     @FindBy(id = "Tags")
-    private WebElement localityTextBox;
+     public WebElement localityTextBox;
 
     @FindBy(id = "SearchHotelsButton")
-    private WebElement searchButton;
+    public WebElement searchButton;
 
     @FindBy(id = "travellersOnhome")
-    private WebElement travellerSelection;
+    public WebElement travellerSelection;
 
     @Test
-    public void shouldBeAbleToSearchForHotels() {
+    public void shouldBeAbleToSearchForHotels()throws InterruptedException {
+    	
+    		driver = new ChromeDriver();
         setDriverPath();
-
+        
+        
         driver.get("https://www.cleartrip.com/");
+        PageFactory.initElements(driver,HotelBookingTest.class);
+        
+        waitFor(2000);
+       
         hotelLink.click();
 
         localityTextBox.sendKeys("Indiranagar, Bangalore");
@@ -36,6 +50,13 @@ public class HotelBookingTest {
 
         driver.quit();
 
+    }
+    private void waitFor(int durationInMilliSeconds) {
+        try {
+            Thread.sleep(durationInMilliSeconds);
+        } catch (InterruptedException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
     }
 
     private void setDriverPath() {
